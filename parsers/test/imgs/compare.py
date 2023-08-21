@@ -39,7 +39,7 @@ if __name__ == "__main__":
   ax.plot(iters, pys, c="lightblue", label="py", marker="o", zorder=10)
   ax.plot(iters, rusts, c="lightcoral", label="py+rust", marker="s", zorder=10)
   ax.set_ylabel("Accumulated time(sec)")
-  ax.set_xlabel("iter(10_000_000)")
+  ax2.set_xlabel("iter(10_000_000)")
   ax.legend()
   ax.grid(True)
 
