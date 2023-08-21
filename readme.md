@@ -6,7 +6,7 @@ Here is a Python code([```yearly_parser.py```](./parsers/yearly_parser.py)) to p
 
 If ones cicumstance is MS Windows, just use [```rustlib.pyd```](./parsers/rustlib.pyd) file and import it inside the python file. No needs to install Rust.  
 
-Under Linux, needs to build Rust code([```rustlib crate```](./rustlib)) and use a release file with .so extension.
+Under Linux, needs to build the Rust code([```rustlib crate```](./rustlib)) and use a release file with .so extension.
 
 
 ## Increased performance using Rust
@@ -14,7 +14,7 @@ Under Linux, needs to build Rust code([```rustlib crate```](./rustlib)) and use 
   * For the test used [this .gz file(the downloading would start on opening)](http://storage.googleapis.com/books/ngrams/books/20200217/eng/5-01801-of-19423.gz)
 * [Bechmark result](/parsers/test/imgs/py_rust_bench.png)
 * <img src="./parsers/test/imgs/py_rust_bench.png" width="400px" height="250px" title="benchmark result"/>
-* Note that Python's smart_open library appears much faster than some Rust's crates when opening .gz file. This is why Rust codes are used partially inside python code here rather than in the overall process from reading to writing files.
+* Note that Python's smart_open library appears much faster than some Rust's crates when opening .gz file. This is why the Rust codes are used partially inside the python's here rather than in the overall process from reading to writing files.
 
 
 ##
