@@ -1,0 +1,6 @@
+/note.txt
+/parsers/test/ngram_v2020_mock/*.gz
+/parsers/test/yearly_mock1/*
+/parsers/test/yearly_mock2/*
+/rustlib/target
+/rustlib/Cargo.lock
