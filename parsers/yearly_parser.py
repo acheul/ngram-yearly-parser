@@ -89,6 +89,7 @@ class YearlyMaker(object):
         for line in itertools.islice(fin, self.limit):
           line = gensim.utils.to_unicode(line)
 
+          # Case of Not using tag
           yearly_lines = rustlib.parse_line(line, False)
           if yearly_lines:
             yearly_array_updater.insert_lines(yearly_lines)
@@ -107,7 +108,7 @@ class YearlyMaker(object):
 
 # command line example:
 # ```
-# python yearly_parser.py "../dir-of-ngram", "./dir-of-new-yearly-files"
+# python yearly_parser.py "../dir-of-ngram" "./dir-of-new-yearly-files"
 # ```
 if __name__ == '__main__':
   args = sys.argv

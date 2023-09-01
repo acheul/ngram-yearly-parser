@@ -11,7 +11,7 @@ import time
 
 
 # logging
-logging.basicConfig(filename="just_py.log", encoding="utf-8", level=logging.INFO)
+logging.basicConfig(filename="just_py2.log", encoding="utf-8", level=logging.INFO)
 
 
 class YearlyArrayUpdater(object):
