@@ -17,5 +17,10 @@ Under Linux, needs to build the Rust code([```rustlib crate```](./rustlib)) and 
 * Note that Python's smart_open library appears much faster than some Rust's crates when opening .gz file. This is why the Rust codes are used partially inside the python's here rather than in the overall process from reading to writing files.
 
 
+## Updates
+* Google ngram provides cases with Part-of-speech Tags like `_NOUN_`, `_VERB_`, `_ADJ_`. See https://books.google.com/ngrams/info for more information. You can decide to include such cases or not to depends on your research terms. In the code, use 'use_tag' argument to include them or not. Not using tags reduces the time required by a lot.
+
+
+
 ##
 * MIT License

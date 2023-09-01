@@ -65,11 +65,13 @@ class YearlyArrayUpdater(object):
 # Collect new lines in the object of YearlyArrayUpdater so as to make new files.
 #   dirname (str): directory path to retrieve raw file of ngram(v.2020).
 #   yearly_dirname (str): directory path to store new yearly files.
+#   use_tag (bool): use Part-of-speech Tags or not. (see https://books.google.com/ngrams/info)
 #   update_limit (int): parsed lines store limit to make a new yearly file.
 class YearlyMaker(object):
-  def __init__(self, dirname, yearly_dirname, limit=None, update_limit=10_000_000):
+  def __init__(self, dirname, yearly_dirname, use_tag=False, limit=None, update_limit=10_000_000):
     self.dirname = dirname
     self.yearly_dirname = yearly_dirname
+    self.use_tag = use_tag
     self.limit = limit
     self.update_limit=update_limit
     # start the process from the initiation.
@@ -90,7 +92,7 @@ class YearlyMaker(object):
           line = gensim.utils.to_unicode(line)
 
           # Case of Not using tag
-          yearly_lines = rustlib.parse_line(line, False)
+          yearly_lines = rustlib.parse_line(line, self.use_tag)
           if yearly_lines:
             yearly_array_updater.insert_lines(yearly_lines)
 
@@ -118,7 +120,7 @@ if __name__ == '__main__':
   dirname = args[1]
   yearly_dirname = args[2]
 
-  maker = YearlyMaker(dirname, yearly_dirname, update_limit=10_000_000)
+  maker = YearlyMaker(dirname, yearly_dirname, use_tag=False, update_limit=10_000_000)
 
 
 

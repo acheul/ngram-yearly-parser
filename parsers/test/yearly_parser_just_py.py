@@ -59,9 +59,10 @@ class YearlyArrayUpdater(object):
 # Save processed-annual-files inside 'yearly_dirname'
 # The yearly-making-process would start from the initiation!
 class YearlyMaker(object):
-  def __init__(self, dirname, yearly_dirname, limit=None, update_limit=10_000_000):
+  def __init__(self, dirname, yearly_dirname, use_tag=False, limit=None, update_limit=10_000_000):
     self.dirname = dirname
     self.yearly_dirname = yearly_dirname
+    self.use_tag = use_tag
     self.limit = limit
     self.update_limit=update_limit
     # start the process from the initiation.
@@ -86,9 +87,9 @@ class YearlyMaker(object):
             continue
           ngram = line_split[0]
 
-          # case of not using tag
-          if "_" in ngram:
-            continue
+          if not self.use_tag:
+            if "_" in ngram:
+              continue
 
           year_counts = line_split[1:]
           
@@ -127,4 +128,4 @@ if __name__ == '__main__':
   dirname = args[1]
   yearly_dirname = args[2]
 
-  maker = YearlyMaker(dirname, yearly_dirname, update_limit=10_000_000)
+  maker = YearlyMaker(dirname, yearly_dirname, use_tag=False, update_limit=10_000_000)
