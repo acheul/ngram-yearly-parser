@@ -85,6 +85,11 @@ class YearlyMaker(object):
           if len(line_split)<2:
             continue
           ngram = line_split[0]
+
+          # case of not using tag
+          if "_" in ngram:
+            continue
+
           year_counts = line_split[1:]
           
           for ycc in year_counts:
@@ -93,6 +98,7 @@ class YearlyMaker(object):
               try:
                 year, match_count = int(ycc[0]), ycc[1]
                 ngram_count = "/t".join([ngram, match_count]) # in the format of "(ngram) \t (match_count)"
+                ngram_count += "/n"
 
                 yearly_array_updater.insert((year, ngram_count))
               except:

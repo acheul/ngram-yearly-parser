@@ -10,7 +10,7 @@ import time
 
 # logging
 import logging
-logging.basicConfig(filename="yearly_parser.log", encoding="utf-8", level=logging.INFO)
+logging.basicConfig(filename="yearly_parser2.log", encoding="utf-8", level=logging.INFO)
 
 
 # import rustlib
@@ -89,8 +89,9 @@ class YearlyMaker(object):
         for line in itertools.islice(fin, self.limit):
           line = gensim.utils.to_unicode(line)
 
-          yearly_lines = rustlib.parse_line(line)
-          yearly_array_updater.insert_lines(yearly_lines)
+          yearly_lines = rustlib.parse_line(line, False)
+          if yearly_lines:
+            yearly_array_updater.insert_lines(yearly_lines)
 
       #t = time.time()-t0
       #print(f"processing file {fname} took {round(t, 2)}sec.")

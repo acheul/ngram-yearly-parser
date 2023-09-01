@@ -17,10 +17,16 @@ use std::collections::HashMap;
 ///   input line: "This is a five gram\t1910,2,2\t1920,1,1\t1930,12,10"
 ///   result: [(1910, "This is a five gram\t2"), (1920, "This is a five gram\t1"), (1930, "This is a five gram\t12")]
 /// ```
-fn parse_line(_py: Python, line: &str) -> PyResult<Option<Vec<(u16, String)>>> {
+fn parse_line(_py: Python, line: &str, use_tag: bool) -> PyResult<Option<Vec<(u16, String)>>> {
 
   let mut line_split = line.split('\t');
   if let Some(ngram) = line_split.next() {
+
+    if !use_tag {
+      if ngram.contains('_') {
+        return Ok(None)
+      }
+    }
 
     let new_lines: Vec<(u16, String)> =
       line_split.filter_map(|ycc| {
@@ -29,7 +35,7 @@ fn parse_line(_py: Python, line: &str) -> PyResult<Option<Vec<(u16, String)>>> {
         if let Some(year) = ycc.next() {
           if let Ok(year) = year.parse::<u16>() {
             if let Some(match_count) = ycc.next() {
-              let ngram_count = format!("{}\t{}", ngram, match_count);
+              let ngram_count = format!("{}\t{}\n", ngram, match_count);
               // let ngram_count = format!("{}\t{}\n", ngram, match_count);
               return Some((year, ngram_count));
             }
@@ -68,7 +74,7 @@ fn collect_lines(_py: Python, lines: Vec<(u16, String)>) -> PyResult<HashMap<u16
 
 py_module_initializer!(rustlib, |py, module| {
   module.add(py, "__doc__", "This module is implemented in Rust")?;
-  module.add(py, "parse_line", py_fn!(py, parse_line(line: &str)))?;
+  module.add(py, "parse_line", py_fn!(py, parse_line(line: &str, use_tag: bool)))?;
   module.add(py, "collect_lines", py_fn!(py, collect_lines(lines: Vec<(u16, String)>)))?;
   Ok(())
 });

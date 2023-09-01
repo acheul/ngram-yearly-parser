@@ -15,7 +15,7 @@ if __name__ == "__main__":
     lines = [float(e[2]) for e in lines]
     rusts.extend(lines)
 
-  with open("../just_py.log", "r") as f:
+  with open("../just_py2.log", "r") as f:
     f = f.read()
 
     lines = [e.split(":") for e in f.split("\n")]
@@ -43,5 +43,5 @@ if __name__ == "__main__":
   ax.legend()
   ax.grid(True)
 
-  plt.savefig("./py_rust_bench.png", dpi=240, bbox_inches='tight')
+  plt.savefig("./py_rust_bench2.png", dpi=240, bbox_inches='tight')
   plt.show()
